@@ -1,0 +1,20 @@
+SENSOR
+
+  - platform: template
+    sensors:
+          waterfilter_usage_m3:
+            friendly_name: "Total Water Filter Usage"
+            unit_of_measurement: "m³"
+            value_template: >
+              {% set C = states('sensor.water_filter_usage_normal') | float %}
+              {{ (C / 1000) |round(3) }}
+            icon_template: mdi:counter
+            
+ UTILITY          
+   water_filter_usage:
+    source: sensor.water_filter_flow
+    cycle: yearly
+    tariffs:
+     - normal
+     
+ 
